@@ -76,6 +76,7 @@ void loop() {
     int speed_2 = 0;
 int reconnect_count=1;
       while (WiFi.status() != WL_CONNECTED) {
+        motors.stop(); 
         WiFi.reconnect();
         delay(500);
         Serial.print("reconnection attempt: ");
