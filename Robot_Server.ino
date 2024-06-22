@@ -41,16 +41,16 @@ const char *password = "0549277459";
 NetworkServer server(80);
 
 void setup() {
-  delay(2000);
+  delay(1000);
   Serial.begin(115200);
+  delay(2000);
   pinMode(2, OUTPUT);  // set the LED pin mode
 
   delay(10);
   motors.setSpeed(70);
   // We start by connecting to a WiFi network
 
-  Serial.println();
-  Serial.println();
+
   Serial.print("Connecting to ");
   Serial.println(ssid);
 
@@ -74,6 +74,16 @@ void loop() {
     bool isForward_2 = 0;
     int speed_1 = 0;
     int speed_2 = 0;
+int reconnect_count=1;
+      while (WiFi.status() != WL_CONNECTED) {
+        WiFi.reconnect();
+        delay(500);
+        Serial.print("reconnection attempt: ");
+        Serial.print(reconnect_count, DEC);
+        Serial.println(" failed. ");
+        reconnect_count++;
+  }
+   
   NetworkClient client = server.accept();  // listen for incoming clients
 
   if (client) {                     // if you get a client,
@@ -121,11 +131,11 @@ void loop() {
           digitalWrite(2, LOW);  // GET /L turns the LED off
         }
         if(currentLine.length()==13&&currentLine.startsWith("GET")){
-          Serial.println();
-                     Serial.print("str is: ");
-           Serial.println(currentLine);
-           Serial.print("str len is: ");
- Serial.println(currentLine.length(),DEC);
+//           Serial.println();
+//                      Serial.print("str is: ");
+//            Serial.println(currentLine);
+//            Serial.print("str len is: ");
+//  Serial.println(currentLine.length(),DEC);
 
           char M1_Direction = currentLine[5];
           String M1_Speed = currentLine.substring(6,9);
