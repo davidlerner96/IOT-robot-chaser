@@ -45,8 +45,8 @@ def send_motion_command(ip_address, port, left_direction, left_pwm, right_direct
 ip_address = "192.168.1.100"
 port = 8080
 left_direction = "F"
-left_pwm = 150
-right_direction = "B"
+left_pwm = 200
+right_direction = "F"
 right_pwm = 200
 angle = 75
 
