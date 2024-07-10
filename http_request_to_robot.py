@@ -33,7 +33,7 @@ def send_motion_command(ip_address, port, left_direction, left_pwm, right_direct
     command = f"{left_direction}{left_pwm_str}{right_direction}{right_pwm_str}A{angle_str}A"
 
     # Construct the URL
-    url = f"http://{ip_address}:{port}/?cmd={command}"
+    url = f"http://{ip_address}:{port}/{command}"
 
     # Send the GET request
     response = requests.get(url)
