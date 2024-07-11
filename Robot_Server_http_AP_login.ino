@@ -185,7 +185,7 @@ void setup() {
 }
 
 void loop() {
-  delay(3000);
+  
     // Handle WiFi reconnection if the connection is lost
     if (WiFi.status() != WL_CONNECTED) {
         Serial.println("WiFi connection lost. Stopping motors and attempting to reconnect...");
@@ -197,6 +197,7 @@ void loop() {
             delay(250);
             WiFi.reconnect();
             Serial.print(".");
+            delay(3000);
         }
         Serial.println("Reconnected to WiFi");
     }
