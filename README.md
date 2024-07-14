@@ -38,6 +38,9 @@ This project, 236333 - IoT Robot Chaser, focuses on developing a robot that can 
    - Implements the pure pursuit algorithm for tracking a moving target.
    - Includes mechanisms for smoother tracking and a simulation to visualize and refine the robot's movement logic.
 
+4. **Integration:**
+   - Combined the scripts to receive coordinates from the OptiTrack system, calculate the robot's motion using the pure pursuit algorithm, and send motion requests to the robot.
+
 ## Edge Cases
 
 - The robot attempts to reconnect to WiFi whenever the connection is lost.
@@ -45,15 +48,9 @@ This project, 236333 - IoT Robot Chaser, focuses on developing a robot that can 
 
 ## Current Issues
 
-- (List any known issues or problems here)
+- **Bug in Robot's Server Code:** There are conflicting commands, preventing the servo motor angle from changing upon command.
 
 ## TODO
-
-- **Integration:**
-  - Combine the three scripts from the Lab Components:
-    1. Replace simulation data with actual data from the OptiTrack system.
-    2. Calculate the direction of motion using the pure pursuit algorithm.
-    3. Send actual movement commands to the robot.
 
 - **Testing and Adjustment:**
   - Observe the robot's actual motion and make necessary adjustments or add mechanisms for improvement.
