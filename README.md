@@ -48,9 +48,11 @@ This project, 236333 - IoT Robot Chaser, focuses on developing a robot that can 
 
 ## Current Issues
 
-- **Bug in Robot's Server Code:** There are conflicting commands, preventing the servo motor angle from changing upon command.
+(List any known issues or problems here)
 
 ## TODO
 
 - **Testing and Adjustment:**
   - Observe the robot's actual motion and make necessary adjustments or add mechanisms for improvement.
+  - Multi target tracking.
+  - BMI160 sensor.
