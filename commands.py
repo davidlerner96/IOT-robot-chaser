@@ -34,22 +34,9 @@ def send_motion_command(ip_address, port, left_direction, left_pwm, right_direct
 
     # Construct the URL
     url = f"http://{ip_address}:{port}/{command}"
-
+    print("sending request: ")
     # Send the GET request
     response = requests.get(url)
-
+    print(response)
+    print("request sent!")
     return response
-
-
-# Example usage:
-ip_address = "192.168.1.100"
-port = 8080
-left_direction = "F"
-left_pwm = 200
-right_direction = "F"
-right_pwm = 200
-angle = 75
-
-response = send_motion_command(ip_address, port, left_direction, left_pwm, right_direction, right_pwm, angle)
-print(response.status_code)
-print(response.text)

@@ -45,6 +45,9 @@ This project, 236333 - IoT Robot Chaser, focuses on developing a robot that can 
 
 - The robot attempts to reconnect to WiFi whenever the connection is lost.
 - During reconnection attempts, the LED blinks, and the robot does not move.
+- The robot operator notifies in case the robot is not responding or not connected.
+- Notification by the robot operator when the optitrack system is down or not streaming.
+- Notification by the robot operator whenever the robot is going outside the board's limit.
 
 ## Current Issues
 
@@ -56,3 +59,6 @@ This project, 236333 - IoT Robot Chaser, focuses on developing a robot that can 
   - Observe the robot's actual motion and make necessary adjustments or add mechanisms for improvement.
   - Multi target tracking.
   - BMI160 sensor.
+  
+  - **Adding indicator leds to robot:**
+  - Add some indicator leds to the robot for the above edge cases so that the user can identify the issue also on the robot's side.
