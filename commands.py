@@ -40,3 +40,20 @@ def send_motion_command(ip_address, port, left_direction, left_pwm, right_direct
     print(response)
     print("request sent!")
     return response
+
+
+def send_led_error_command(ip_address, port, led, state):
+    url = None
+    if state == 'low':
+        url = f"http://{ip_address}:{port}/L{led}"
+    if state == 'high':
+        url = f"http://{ip_address}:{port}/H{led}"
+        response = requests.get(url)
+        print(response)
+        print("request sent!")
+        url = f"http://{ip_address}:{port}/L2"
+        response = requests.get(url)
+    # Send the GET request
+    response = requests.get(url)
+
+    return response

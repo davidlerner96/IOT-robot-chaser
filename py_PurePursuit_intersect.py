@@ -9,32 +9,41 @@ class State:
     """
 
     def __init__(self, x=0.0, y=0.0, yaw=0.0, v=0.0):
-        WB = 0.14
+        self.WB = 0.14
         self.yaw = yaw
-        self.x = x + ((WB / 3) * math.cos(self.yaw))
-        self.y = y + ((WB / 2) * math.sin(self.yaw))
+        self.x = x + ((self.WB / 3) * math.cos(self.yaw))
+        self.y = y + ((self.WB / 2) * math.sin(self.yaw))
 
         self.v = v
-        self.rear_x = self.x - ((WB / 2) * math.cos(self.yaw))
-        self.rear_y = self.y - ((WB / 2) * math.sin(self.yaw))
+        self.rear_x = self.x - ((self.WB / 2) * math.cos(self.yaw))
+        self.rear_y = self.y - ((self.WB / 2) * math.sin(self.yaw))
         self.predelta = 0.0
 
-
+import time
 class PurePersuit_Controller(object):
     def __init__(self, WB=0.14, MAX_STEER=np.deg2rad(30.0), ):
         self.WB = WB
         self.MAX_STEER = MAX_STEER
+        self.Lookahead = 0.1
 
-    def pure_pursuit_steer_control(self, state, target_pos):
+
+    def pure_pursuit_steer_control(self, state, target_pos, target_v):
         # drive_b = False
         target_x, target_y = target_pos
-        Lf = ((target_y - state.rear_y) ** 2 + (target_x - state.rear_x) ** 2) ** 0.5
-        alpha = math.atan2(target_y - state.rear_y, target_x - state.rear_x) - state.yaw
-        delta = math.atan2(2.0 * self.WB * math.sin(alpha) / Lf, 1.0)*1.2
+        Lf = ((target_y - state.rear_y) ** 2 + (target_x - state.rear_x) ** 2) ** 0.5 + state.WB + target_v*self.Lookahead
+        alpha = (math.atan2(target_y - state.rear_y, target_x - state.rear_x))
+
+        # print(f"alpha : {alpha}")
+        alpha = alpha - state.yaw
+
+        # print(f"yaw : {state.yaw}")
+        # print(f"combine : {alpha}")
+        # time.sleep(1)
+        delta = math.atan2(2.0 * self.WB * math.sin(alpha) , Lf)*1.5
         # alpha_b = abs(alpha) + 3.14
         # if alpha_b < abs(alpha):
         #     drive_b = True
-        print(f"delta :  {np.degrees(delta/1.2)}")
+        # print(f"delta :  {np.degrees(delta/1.2)}")
         if delta >= self.MAX_STEER:
             delta = self.MAX_STEER
         elif delta <= -self.MAX_STEER:

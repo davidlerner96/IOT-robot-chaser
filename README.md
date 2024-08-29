@@ -61,15 +61,15 @@ This project, 236333 - IoT Robot Chaser, focuses on developing a robot that can 
 - GREEN led: If the operator does not get the Optitrack streaming.
 
 
-
 ## TODO
+
+- **Response/Delay time improvements suggestions:**
+  - add stack or LIFO array to store last command and each time perform only the latest command.
+  - and/or convert robot server from http to WS.
+
 
 - **Testing and Adjustment:**
   - Observe the robot's actual motion and make necessary adjustments or add mechanisms for improvement.
   - Multi target tracking.
   - BMI160 sensor.
-  
-  - **Adding indicator leds to robot:**
-  - Add some indicator leds to the robot for the above edge cases so that the user can identify the issue also on the robot's side.
- 
-- 
+   
