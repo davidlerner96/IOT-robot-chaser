@@ -53,6 +53,15 @@ This project, 236333 - IoT Robot Chaser, focuses on developing a robot that can 
 
 (List any known issues or problems here)
 
+## Robot edge cases leds
+
+- RED led: If the car not connected to wifi at the beginning.
+- RED led(blink): after the connection if there are issue with the wifi connection.
+- BLUE led: If the target or the chaser is out of board.
+- GREEN led: If the operator does not get the Optitrack streaming.
+
+
+
 ## TODO
 
 - **Testing and Adjustment:**
@@ -62,3 +71,5 @@ This project, 236333 - IoT Robot Chaser, focuses on developing a robot that can 
   
   - **Adding indicator leds to robot:**
   - Add some indicator leds to the robot for the above edge cases so that the user can identify the issue also on the robot's side.
+ 
+- 
