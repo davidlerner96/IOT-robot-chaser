@@ -107,6 +107,10 @@ void setup() {
     Serial.begin(115200);
     myServo.attach(servoPin);
     pinMode(2, OUTPUT);
+    pinMode(4, OUTPUT);
+    digitalWrite(2, HIGH);
+    pinMode(15, OUTPUT);
+    
 
     motors.setSpeed(70);
 
@@ -129,7 +133,7 @@ void setup() {
         delay(3000);
         ESP.restart();
     }
-
+    digitalWrite(2, LOW);
     Serial.println("WiFi connected.");
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
@@ -143,8 +147,13 @@ void setup() {
     server.on("/", HTTP_GET, []() {
         server.send(200, "text/html",
                     "<h1>Welcome to ESP32</h1>"
-                    "<p><a href=\"/H\">Turn LED on</a></p>"
-                    "<p><a href=\"/L\">Turn LED off</a></p>"
+                    "<p><a href=\"/H2\">Turn LED2 (red) on</a></p>"
+                    "<p><a href=\"/H4\">Turn LED4 (blue) on</a></p>"
+                    "<p><a href=\"/H15\">Turn LED15 (green) on</a></p>"
+                    "<p><a href=\"/L2\">Turn LED2 off</a></p>"
+                    "<p><a href=\"/L4\">Turn LED4 off</a></p>"
+                    "<p><a href=\"/L15\">Turn LED15 off</a></p>"
+                    
                     
                     "<p> deg 60 </p>"
                     "<p><a href=\"/F254F254A060A\">Drive forward fast</a></p>"
@@ -178,17 +187,47 @@ void setup() {
                     "</form>");
     });
 
-    server.on("/H", HTTP_GET, []() {
+//Red
+    server.on("/H2", HTTP_GET, []() {
         ledState = HIGH;
         digitalWrite(2, ledState);
-        server.send(200, "text/html", "<p>LED is now ON</p><p><a href=\"/\">Go Back</a></p>");
+        server.send(200, "text/html", "<p>LED2 is now ON</p><p><a href=\"/\">Go Back</a></p>");
     });
 
-    server.on("/L", HTTP_GET, []() {
+//Blue
+    server.on("/H4", HTTP_GET, []() {
+        ledState = HIGH;
+        digitalWrite(4, ledState);
+        server.send(200, "text/html", "<p>LED4 is now ON</p><p><a href=\"/\">Go Back</a></p>");
+    });
+
+  //Green
+    server.on("/H15", HTTP_GET, []() {
+        ledState = HIGH;
+        digitalWrite(15, ledState);
+        server.send(200, "text/html", "<p>LED15 is now ON</p><p><a href=\"/\">Go Back</a></p>");
+    });
+
+//Red
+        server.on("/L2", HTTP_GET, []() {
         ledState = LOW;
         digitalWrite(2, ledState);
-        server.send(200, "text/html", "<p>LED is now OFF</p><p><a href=\"/\">Go Back</a></p>");
+        server.send(200, "text/html", "<p>LED2 is now OFF</p><p><a href=\"/\">Go Back</a></p>");
     });
+//Blue
+        server.on("/L4", HTTP_GET, []() {
+        ledState = LOW;
+        digitalWrite(4, ledState);
+        server.send(200, "text/html", "<p>LED4 is now OFF</p><p><a href=\"/\">Go Back</a></p>");
+    });
+//Green
+        server.on("/L15", HTTP_GET, []() {
+        ledState = LOW;
+        digitalWrite(15, ledState);
+        server.send(200, "text/html", "<p>LED15 is now OFF</p><p><a href=\"/\">Go Back</a></p>");
+    });
+
+
 
     server.on("/reset", HTTP_GET, []() {
         server.send(200, "text/html",
